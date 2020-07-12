@@ -4,6 +4,6 @@
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)tesseract\3.3.0\build\Tesseract.targets" Condition="Exists('$(NuGetPackageRoot)tesseract\3.3.0\build\Tesseract.targets')" />
+    <Import Project="$(NuGetPackageRoot)tesseract_463\3.3.0.1\build\Tesseract_463.targets" Condition="Exists('$(NuGetPackageRoot)tesseract_463\3.3.0.1\build\Tesseract_463.targets')" />
   </ImportGroup>
 </Project>

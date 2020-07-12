@@ -41,13 +41,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "System.Drawing.Common": {
+            "Tesseract_463": {
               "target": "Package",
-              "version": "[4.7.0, )"
-            },
-            "Tesseract": {
-              "target": "Package",
-              "version": "[3.3.0, )"
+              "version": "[3.3.0.1, )"
             }
           },
           "imports": [

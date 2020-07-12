@@ -30,8 +30,6 @@ namespace RaceCarSpeed
 
             // 讀取圖片
             processedImage = NegativePicture(new Bitmap(filename));
-            // 儲存圖片
-            // processedImage.Save(filePath + "/processedImage.png", ImageFormat.Png);
 
             return processedImage;
         }
