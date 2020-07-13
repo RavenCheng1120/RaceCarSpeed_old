@@ -12,13 +12,6 @@ namespace RaceCarSpeed
         public string filename;
         public Bitmap processedImage;
 
-        public ImageProcess(string imageName)
-        {
-            // 取得測試圖片的path
-            // Debug狀態，image檔案位於/Users/patty/Projects/RaceCarSpeed/RaceCarSpeed/bin/Debug/netcoreapp3.1
-            filePath = Directory.GetCurrentDirectory();
-            filename = filePath + imageName;
-        }
 
         public Bitmap ReadImage()
         {
