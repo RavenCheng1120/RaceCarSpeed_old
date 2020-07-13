@@ -5,5 +5,6 @@
   </PropertyGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)tesseract_463\3.3.0.1\build\Tesseract_463.targets" Condition="Exists('$(NuGetPackageRoot)tesseract_463\3.3.0.1\build\Tesseract_463.targets')" />
+    <Import Project="$(NuGetPackageRoot)emgu.cv.runtime.windows\4.3.0.3890\build\Emgu.CV.runtime.windows.targets" Condition="Exists('$(NuGetPackageRoot)emgu.cv.runtime.windows\4.3.0.3890\build\Emgu.CV.runtime.windows.targets')" />
   </ImportGroup>
 </Project>

@@ -9,7 +9,7 @@ namespace RaceCarSpeed
     public class ImageProcess
     {
         public readonly string filePath;
-        private readonly string filename;
+        public string filename;
         public Bitmap processedImage;
 
         public ImageProcess(string imageName)

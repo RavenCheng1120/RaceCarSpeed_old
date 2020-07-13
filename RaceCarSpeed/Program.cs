@@ -10,31 +10,39 @@ namespace RaceCarSpeed
         {
             // initialize Tesseract object
             TesseractEngine ocr = new TesseractEngine("./tessdata", "eng", EngineMode.Default);
+            // declare variables
+            string speedStr;
+            int speed = 0;
+
+            getImage projectCars2 = new getImage();
+            projectCars2.LoadVideo();
+
 
             // calculate total process time
-            DateTime beforDT = System.DateTime.Now; 
+            DateTime beforDT = System.DateTime.Now;
 
 
             /*** image processing ***/
-            // turning the speed image into negative image 
+            // turn the dashboard image into negative image 
             ImageProcess imageProcess = new ImageProcess("/rawImage.png");
             Bitmap finalImage = imageProcess.ReadImage();
-
-            //* save the processed image as png file
-            // finalImage.Save(imageProcess.filePath + "/processedImage.png", System.Drawing.Imaging.ImageFormat.Png);
             /*** image processing ***/
 
 
             /*** use Tesseract to recognize number ***/
             try
             {
-                Pix pixImage = PixConverter.ToPix(finalImage); //unable to work at Tesseract3.3.0
-                //* read the processed image as Pix format
-                // Pix pixImage = Pix.LoadFromFile(imageProcess.filePath + "/processedImage.png");
+                Pix pixImage = PixConverter.ToPix(finalImage); //unable to work at Tesseract 3.3.0
                 Page page = ocr.Process(pixImage);
-                string str = page.GetText();//識別後的內容
-                Console.WriteLine("Result: " + str);
+                speedStr = page.GetText();//識別後的內容
+                Console.WriteLine("String result: " + speedStr);
                 page.Dispose();
+
+                /*** Parse str to int ***/
+                bool isParsable = Int32.TryParse(speedStr, out speed);
+                if (!isParsable)
+                    Console.WriteLine("Could not be parsed.");
+                /*** Parse str to int ***/
             }
             catch (Exception ex)
             {
@@ -42,6 +50,9 @@ namespace RaceCarSpeed
                 Console.WriteLine(ex.Message);
             }
             /*** use Tesseract to recognize number ***/
+
+
+            Console.WriteLine("Speed right now is at " + speed + "\n");
 
             // calculate total process time
             DateTime afterDT = System.DateTime.Now;
