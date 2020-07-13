@@ -1,4 +1,5 @@
 ﻿using Emgu.CV;
+using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.UI;
 using System;
@@ -14,9 +15,8 @@ namespace RaceCarSpeed
     {
         /* declare variables */
         VideoCapture capture;
-        ImageViewer viewer = new ImageViewer();
         string videoName = Directory.GetCurrentDirectory() + "/ProjectCARS_short.mp4";
-        int testnum = 1;
+        int testnum;
         Bitmap BitmapFrame;
 
 
@@ -28,32 +28,31 @@ namespace RaceCarSpeed
                 throw new FileNotFoundException(videoName);
             }
             capture = new VideoCapture(videoName);
+            testnum = 0;
         }
 
 
         /* get each frame from the video */
         public Bitmap LoadVideo()
         {
-            // Console.WriteLine("Frame rate = " + capture.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
-            Application.Idle += new EventHandler(delegate (object sender, EventArgs e)
-            {
-                viewer.Image = capture.QueryFrame();
-                if(testnum == 1)
-                {
-                    /* Crop area
-                     * x:1545px  y:865px  boxsize: 60x38*/ 
-                    Rectangle cropArea = new Rectangle(1545, 865, 60, 38);
-                    Mat pFrame = Crop_frame(capture.QueryFrame(), cropArea);
-                    BitmapFrame = pFrame.ToBitmap();
-                    // BitmapFrame.Save(Directory.GetCurrentDirectory()+"/cropImage.png", ImageFormat.Png);
-                    testnum = 0;
-                }
-                
-            });
+            //Console.WriteLine("Frame rate = " + capture.GetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps));
 
-            viewer.ShowDialog();
+            /* repeat cropping image until all the frames runs out*/
+            while (testnum < capture.GetCaptureProperty(CapProp.FrameCount))
+            {
+                /* Crop area
+                 * x:1545px  y:865px  boxsize: 60x38*/
+                Rectangle cropArea = new Rectangle(1545, 865, 60, 38);
+                Mat pFrame = Crop_frame(capture.QueryFrame(), cropArea);
+                BitmapFrame = pFrame.ToBitmap();
+                //BitmapFrame.Save(Directory.GetCurrentDirectory() + "/speedImage/cropImage_" + testnum + ".png", ImageFormat.Png);
+                testnum += 1;
+                Console.Write(testnum + " ");
+            }
+            
             return BitmapFrame;
         }
+
 
         /* Crop out a square area */
         Mat Crop_frame(Mat input, Rectangle crop_region)

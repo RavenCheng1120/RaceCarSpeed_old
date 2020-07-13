@@ -14,6 +14,7 @@ namespace RaceCarSpeed
             string speedStr;
             int speed = 0;
 
+            /* load in video, crop out the dashboard image */
             getImage projectCars2 = new getImage();
             projectCars2.LoadVideo();
 
@@ -24,7 +25,7 @@ namespace RaceCarSpeed
 
             /* image processing */
             /* turn the dashboard image into negative image */
-            ImageProcess imageProcess = new ImageProcess("/cropImage.png");
+            ImageProcess imageProcess = new ImageProcess("/rawImage.png");
             Bitmap finalImage = imageProcess.ReadImage();
 
 
