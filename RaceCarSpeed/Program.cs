@@ -8,9 +8,9 @@ namespace RaceCarSpeed
     {
         static void Main(string[] args)
         {
-            // initialize Tesseract object
+            /* initialize Tesseract object */
             TesseractEngine ocr = new TesseractEngine("./tessdata", "eng", EngineMode.Default);
-            // declare variables
+            /* declare variables */
             string speedStr;
             int speed = 0;
 
@@ -18,13 +18,13 @@ namespace RaceCarSpeed
             projectCars2.LoadVideo();
 
 
-            // calculate total process time
+            /* calculate total process time */
             DateTime beforDT = System.DateTime.Now;
 
 
             /*** image processing ***/
-            // turn the dashboard image into negative image 
-            ImageProcess imageProcess = new ImageProcess("/rawImage.png");
+            /* turn the dashboard image into negative image */
+            ImageProcess imageProcess = new ImageProcess("/cropImage.png");
             Bitmap finalImage = imageProcess.ReadImage();
             /*** image processing ***/
 
@@ -54,7 +54,7 @@ namespace RaceCarSpeed
 
             Console.WriteLine("Speed right now is at " + speed + "\n");
 
-            // calculate total process time
+            /* calculate total process time */
             DateTime afterDT = System.DateTime.Now;
             TimeSpan ts = afterDT.Subtract(beforDT);
             Console.WriteLine("DateTime總共花費" + ts.TotalMilliseconds + "ms.");
