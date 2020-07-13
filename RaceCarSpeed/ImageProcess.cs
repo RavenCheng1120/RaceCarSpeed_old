@@ -28,7 +28,7 @@ namespace RaceCarSpeed
         }
 
         // 將圖片轉換成負片效果
-        private static Bitmap NegativePicture(Bitmap image)
+        public Bitmap NegativePicture(Bitmap image)
         {
             int w = image.Width;
             int h = image.Height;
