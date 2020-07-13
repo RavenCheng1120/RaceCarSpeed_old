@@ -22,14 +22,13 @@ namespace RaceCarSpeed
             DateTime beforDT = System.DateTime.Now;
 
 
-            /*** image processing ***/
+            /* image processing */
             /* turn the dashboard image into negative image */
             ImageProcess imageProcess = new ImageProcess("/cropImage.png");
             Bitmap finalImage = imageProcess.ReadImage();
-            /*** image processing ***/
 
 
-            /*** use Tesseract to recognize number ***/
+            /* use Tesseract to recognize number */
             try
             {
                 Pix pixImage = PixConverter.ToPix(finalImage); //unable to work at Tesseract 3.3.0
@@ -38,21 +37,19 @@ namespace RaceCarSpeed
                 Console.WriteLine("String result: " + speedStr);
                 page.Dispose();
 
-                /*** Parse str to int ***/
+                /* Parse str to int */
                 bool isParsable = Int32.TryParse(speedStr, out speed);
                 if (!isParsable)
                     Console.WriteLine("Could not be parsed.");
-                /*** Parse str to int ***/
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error message: ");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("Error message: " + ex.Message);
             }
-            /*** use Tesseract to recognize number ***/
 
 
             Console.WriteLine("Speed right now is at " + speed + "\n");
+
 
             /* calculate total process time */
             DateTime afterDT = System.DateTime.Now;
