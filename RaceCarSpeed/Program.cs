@@ -46,8 +46,6 @@ namespace RaceCarSpeed
             frameCount = 0;
             cropArea = new Rectangle(1545, 865, 60, 38);
             totalFrame = (int)capture.GetCaptureProperty(CapProp.FrameCount); // 影片中的影格總數
-
-            Console.WriteLine("testnum: " + frameCount + "totalFrame: " + totalFrame);
             
 
             /* get each frame from the video */
@@ -65,8 +63,8 @@ namespace RaceCarSpeed
 
                 /* image processing */
                 /* turn the dashboard image into negative image */
-                ImageProcess imageProcess = new ImageProcess();
-                BitmapFrame = imageProcess.NegativePicture(BitmapFrame);
+                // ImageProcess imageProcess = new ImageProcess();
+                // BitmapFrame = imageProcess.NegativePicture(BitmapFrame);
 
                 /* use Tesseract to recognize number */
                 try
@@ -102,7 +100,7 @@ namespace RaceCarSpeed
             }
 
             Console.WriteLine("錯誤數量: " + wrong + "全部frame數量: " + totalFrame);
-            Console.WriteLine("正確率: " + (double)(totalFrame - wrong) / totalFrame);
+            Console.WriteLine("正確率: " + (double)(totalFrame - wrong) / totalFrame + "\n");
         }
 
 
