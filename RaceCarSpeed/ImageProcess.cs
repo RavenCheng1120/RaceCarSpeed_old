@@ -32,8 +32,7 @@ namespace RaceCarSpeed
         {
             int w = image.Width;
             int h = image.Height;
-            BitmapData srcData = image.LockBits(new Rectangle(0, 0, w, h),
-            ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+            BitmapData srcData = image.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
             int bytes = srcData.Stride * srcData.Height;
             byte[] buffer = new byte[bytes];
             byte[] result = new byte[bytes];
@@ -52,7 +51,7 @@ namespace RaceCarSpeed
                     result[current + 3] = 255;
                 }
             }
-
+            
             Bitmap resImg = new Bitmap(w, h);
             BitmapData resData = resImg.LockBits(new Rectangle(0, 0, w, h),
             ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);

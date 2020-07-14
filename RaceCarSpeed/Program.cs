@@ -27,37 +27,36 @@ namespace RaceCarSpeed
             int preSpeed = 0; // previous speed
 
             /* declare variables for video input */
-            VideoCapture capture;
             string videoName = Directory.GetCurrentDirectory() + "/ProjectCARS_short.mp4";
-            int frameCount;
-            int totalFrame;
+            VideoCapture capture = new VideoCapture(videoName);
+            int frameCount = 0;
+            int totalFrame = (int)capture.GetCaptureProperty(CapProp.FrameCount); // 影片中的影格總數;
             Bitmap BitmapFrame;
-            Rectangle cropArea;
+            Rectangle cropArea = new Rectangle(1545, 865, 60, 38);
 
-            /* declare variables for testing error rate */
+            /* declare variables for testing*/
             int wrong = 0;
+            DateTime beforDT;
+            DateTime afterDT;
+            TimeSpan ts;
 
-
+            /* check if video file exist */
             if (!File.Exists(videoName))
             {
                 throw new FileNotFoundException(videoName);
             }
-            capture = new VideoCapture(videoName);
-            frameCount = 0;
-            cropArea = new Rectangle(1545, 865, 60, 38);
-            totalFrame = (int)capture.GetCaptureProperty(CapProp.FrameCount); // 影片中的影格總數
             
 
             /* get each frame from the video */
             while (frameCount < totalFrame)
             {
                 /* calculate total process time */
-                DateTime beforDT = System.DateTime.Now;
+                beforDT = System.DateTime.Now;
 
                 /* Crop area
                  * x:1545px  y:865px  boxsize: 60x38*/
-                Mat pFrame = Crop_frame(capture.QueryFrame(), cropArea);
-                BitmapFrame = pFrame.ToBitmap();
+                // Mat pFrame = Crop_frame(capture.QueryFrame(), cropArea);
+                BitmapFrame = Crop_frame(capture.QueryFrame(), cropArea).ToBitmap();
                 frameCount += 1;
 
 
@@ -94,8 +93,8 @@ namespace RaceCarSpeed
                 preSpeed = speed;
 
                 /* calculate total process time */
-                DateTime afterDT = System.DateTime.Now;
-                TimeSpan ts = afterDT.Subtract(beforDT);
+                afterDT = System.DateTime.Now;
+                ts = afterDT.Subtract(beforDT);
                 Console.WriteLine("DateTime總共花費" + ts.TotalMilliseconds + "ms.\n");
             }
 
@@ -115,6 +114,5 @@ namespace RaceCarSpeed
 
             return cropped_im.Mat;
         }
-
     }
 }
